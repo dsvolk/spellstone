@@ -1,6 +1,6 @@
 FROM neo4j:5.19.0
 
-ENV NEO4J_AUTH=neo4j/derparol
+ENV NEO4J_AUTH=none
 
 # Expose ports for HTTP and Bolt
 EXPOSE 7474 7687
