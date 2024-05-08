@@ -5,8 +5,8 @@ ENV NEO4J_AUTH=none
 # Expose ports for HTTP and Bolt
 EXPOSE 7474 7687
 
-# Mount a volume for persistent data
-VOLUME /path/to/your/data:/data
+# In my deployment, volumes are managed by Railway.app, but make sure you have a volume for persistent data mounted at /data
+# VOLUME /data
 
 # Start Neo4j server
 CMD ["neo4j"]
