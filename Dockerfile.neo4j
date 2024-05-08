@@ -1,0 +1,12 @@
+FROM neo4j:5.19.0
+
+ENV NEO4J_AUTH=none
+
+# Expose ports for HTTP and Bolt
+EXPOSE 7474 7687
+
+# Mount a volume for persistent data
+VOLUME /path/to/your/data:/data
+
+# Start Neo4j server
+CMD ["neo4j"]
