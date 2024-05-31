@@ -2,7 +2,6 @@ from langchain_community.graphs import Neo4jGraph
 
 from .config import Neo4jConfig
 
-
 # OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 
 
