@@ -1,13 +1,13 @@
 import os
 import click
 from dotenv import load_dotenv
-import frontmatter
 
 from .mdparse import parse_note
 from .neo4j import test_connection
 
 # Load environment variables from .env file
 load_dotenv(override=True)
+
 
 @click.group()
 def cli():
@@ -19,12 +19,17 @@ def scan_directory(directory):
     for root, dirs, files in os.walk(directory):
         dirs[:] = [d for d in dirs if d not in [".trash", ".obsidian"]]
         for file in files:
-            if file.endswith('.md'):
+            if file.endswith(".md"):
                 markdown_files.append(os.path.join(root, file))
     return markdown_files
 
+
 @cli.command()
-@click.option('--directory', default=lambda: os.getenv('OBSIDIAN_VAULT_DIR', '.'), help='Directory to scan for Markdown files')
+@click.option(
+    "--directory",
+    default=lambda: os.getenv("OBSIDIAN_VAULT_DIR", "."),
+    help="Directory to scan for Markdown files",
+)
 def scan(directory):
     """Output a list of Markdown files in a directory."""
     try:
@@ -35,8 +40,13 @@ def scan(directory):
     except FileNotFoundError:
         click.echo(f"Directory '{directory}' not found.")
 
+
 @cli.command()
-@click.option('--file', default=lambda: os.getenv('OBSIDIAN_DEFAULT_FILE', '.'), help='Markdown file to parse')
+@click.option(
+    "--file",
+    default=lambda: os.getenv("OBSIDIAN_DEFAULT_FILE", "."),
+    help="Markdown file to parse",
+)
 def parse(file):
     """Parse a particular Markdown file and output all its frontmatter values and sections."""
     try:
@@ -52,15 +62,16 @@ def parse(file):
     except Exception as e:
         click.echo(f"An error occurred: {e}")
 
+
 @cli.command()
 def test():
     """Test the Obsidian vault is there"""
     try:
-        n_files = len(scan_directory(os.getenv('OBSIDIAN_VAULT_DIR')))
+        n_files = len(scan_directory(os.getenv("OBSIDIAN_VAULT_DIR")))
         click.echo(f"✅ Found {n_files} Markdown files.")
     except FileNotFoundError:
         click.echo(f"❌ Directory '{os.getenv('OBSIDIAN_VAULT_DIR')}' not found.")
-    
+
     """Test Neo4j connection"""
     try:
         n_nodes = len(test_connection())
@@ -68,11 +79,12 @@ def test():
     except Exception as e:
         click.echo(f"❌ Error connecting to Neo4j: {e}")
 
+
 @cli.command()
 def index():
     """Index all Markdown files in the Obsidian vault."""
     try:
-        markdown_files = scan_directory(os.getenv('OBSIDIAN_VAULT_DIR'))
+        markdown_files = scan_directory(os.getenv("OBSIDIAN_VAULT_DIR"))
 
         for file in markdown_files:
             metadata, content, sections = parse_note(file)
@@ -86,6 +98,5 @@ def index():
         click.echo(f"An error occurred: {e}")
 
 
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     cli()
