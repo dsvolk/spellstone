@@ -20,11 +20,11 @@ types-pyyaml = "^6.0"
 obsidiantools = "^0.10.0"
 markdown = "^3.6"
 python-frontmatter = "^1.1.0"
-langchain = "^0.2.1"
-langchain-community = "^0.2.1"
-langchain-openai = "^0.1.8"
-langchain-text-splitters = "^0.2.0"
-unstructured = "^0.14.3"
+langchain = "^0.2"
+langchain-community = "^0.2"
+langchain-openai = "^0.1"
+langchain-text-splitters = "^0.2"
+unstructured = "^0.14"
 
 
 [tool.poetry.group.dev.dependencies]
