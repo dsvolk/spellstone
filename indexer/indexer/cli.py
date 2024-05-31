@@ -63,10 +63,28 @@ def test():
     
     """Test Neo4j connection"""
     try:
-        n_nodes = test_connection()
+        n_nodes = len(test_connection())
         click.echo(f"✅ Found {n_nodes} nodes in the graph.")
     except Exception as e:
         click.echo(f"❌ Error connecting to Neo4j: {e}")
+
+@cli.command()
+def index():
+    """Index all Markdown files in the Obsidian vault."""
+    try:
+        markdown_files = scan_directory(os.getenv('OBSIDIAN_VAULT_DIR'))
+
+        for file in markdown_files:
+            metadata, content, sections = parse_note(file)
+            click.echo(f"Indexing {file}...")
+            click.echo(f"Metadata: {metadata}")
+            click.echo(f"Content: {content}")
+            click.echo(f"Sections: {sections}")
+    except FileNotFoundError:
+        click.echo(f"Directory '{os.getenv('OBSIDIAN_VAULT_DIR')}' not found.")
+    except Exception as e:
+        click.echo(f"An error occurred: {e}")
+
 
 
 if __name__ == '__main__':

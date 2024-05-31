@@ -14,5 +14,8 @@ neo4j:
 env:
 	poetry install --with dev,test --no-root
 
-install: env
-	poetry run pre-commit install
+# install: env
+# 	poetry run pre-commit install
+
+test:
+	poetry run python -m indexer.cli test
