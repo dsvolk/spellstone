@@ -2567,6 +2567,21 @@ llama-index-core = ">=0.10.7,<0.11.0"
 llama-parse = ">=0.4.0,<0.5.0"
 
 [[package]]
+name = "llama-index-readers-obsidian"
+version = "0.1.3"
+description = "llama-index readers obsidian integration"
+optional = false
+python-versions = ">=3.8.1,<4.0"
+files = [
+    {file = "llama_index_readers_obsidian-0.1.3-py3-none-any.whl", hash = "sha256:9aba8bfd9b17227f1bdb88376c46091b1309beea9d15e848d96eeb59fe3bbd25"},
+    {file = "llama_index_readers_obsidian-0.1.3.tar.gz", hash = "sha256:cec33e84291887009e23612a90e97d6e9eda26c2909915cdedcdcb8078d81080"},
+]
+
+[package.dependencies]
+llama-index-core = ">=0.10.1,<0.11.0"
+llama-index-readers-file = ">=0.1.1,<0.2.0"
+
+[[package]]
 name = "llama-index-vector-stores-neo4jvector"
 version = "0.1.4"
 description = "llama-index vector_stores neo4jvector integration"
@@ -5745,4 +5760,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.13"
-content-hash = "4421c16caa66d4b533f2b2263dc1815f25506115c4ff24ea7443aa07f1dd63d1"
+content-hash = "4245c5d56a62bcd1b2b5a2f090771846dfec89611823b9725728408d52bb9658"
